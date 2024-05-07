@@ -56,6 +56,14 @@ CREATE TABLE Subscriptions (
     FOREIGN KEY (ChannelID) REFERENCES Users(UserID)
 );
 
+CREATE TRIGGER DeleteCommentsOnVideoDelete
+ON Videos
+AFTER DELETE
+AS
+BEGIN
+    DELETE FROM Comments WHERE VideoID IN (SELECT VideoID FROM deleted);
+END;
+
 -- Uzupełnienie tabeli Users (Użytkownicy)
 INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ('john_doe', 'john@example.com', 'password123', '2023-01-15');
 INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ('jane_smith', 'jane@example.com', 'passw0rd', '2023-02-20');
