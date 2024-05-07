@@ -23,7 +23,7 @@ CREATE TABLE Videos (
 );
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id of storage server' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Videos', @level2type=N'COLUMN',@level2name=N'serverID';
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id of video address storage server' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Videos', @level2type=N'COLUMN',@level2name=N'serverID';
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id of video address storage server' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Videos', @level2type=N'COLUMN',@level2name=N'sectorID';
 
 -- Tworzenie tabeli Comments (Komentarze)
 CREATE TABLE Comments (
