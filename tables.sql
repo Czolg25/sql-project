@@ -17,8 +17,13 @@ CREATE TABLE Videos (
     Views INT DEFAULT 0,
     Likes INT DEFAULT 0,
     Dislikes INT DEFAULT 0,
+    serverID INT,
+    sectorID INT,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id of storage server' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Videos', @level2type=N'COLUMN',@level2name=N'serverID';
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id of video address storage server' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Videos', @level2type=N'COLUMN',@level2name=N'serverID';
 
 -- Tworzenie tabeli Comments (Komentarze)
 CREATE TABLE Comments (
