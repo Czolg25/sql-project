@@ -7,6 +7,9 @@ CREATE TABLE Users (
     DateJoined DATETIME NOT NULL DEFAULT GETDATE()
 );
 
+CREATE UNIQUE INDEX uniqueUsername ON Users (Username);
+CREATE UNIQUE INDEX uniqueEmail ON Users (Email);
+
 -- Tworzenie tabeli Videos (Filmy)
 CREATE TABLE Videos (
     VideoID INT IDENTITY(1,1) PRIMARY KEY,
@@ -21,6 +24,10 @@ CREATE TABLE Videos (
     sectorID INT,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+
+
+CREATE INDEX indexTitle ON Videos (Title);
+CREATE INDEX indexUploadDate ON Videos (UploadDate);
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id of storage server' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Videos', @level2type=N'COLUMN',@level2name=N'serverID';
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id of video address storage server' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Videos', @level2type=N'COLUMN',@level2name=N'sectorID';
@@ -41,6 +48,7 @@ CREATE TABLE Categories (
     CategoryID INT IDENTITY(1,1) PRIMARY KEY,
     CategoryName VARCHAR(50) NOT NULL
 );
+CREATE UNIQUE INDEX uniqueCategoryName ON Categories (CategoryName);
 
 -- Tworzenie tabeli VideoCategories (Relacja wiele-do-wielu między Filmy a Kategorie)
 CREATE TABLE VideoCategories (
@@ -60,6 +68,9 @@ CREATE TABLE Subscriptions (
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (ChannelID) REFERENCES Users(UserID)
 );
+
+CREATE INDEX indexUserID ON Subscriptions (UserID);
+CREATE INDEX indexChannelID ON Subscriptions (ChannelID);
 
 CREATE TRIGGER DeleteCommentsOnVideoDelete
 ON Videos
