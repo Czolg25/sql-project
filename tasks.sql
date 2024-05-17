@@ -12,7 +12,7 @@ select CategoryName from Categories where CategoryName like 'C%';
 
 --zad c
 --wyświetla Tytuły filmów które mają więcej niż 5000 wyświetleń
-select Title from Videos where  Views > 5000
+select Title from Videos where  Views > 5000;
 --Nowi użytkownicy
 select Username from Users where Cast(DateJoined as Date) = Cast(GETDATE() as Date);
 
