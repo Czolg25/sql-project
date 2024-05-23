@@ -95,7 +95,7 @@ CREATE TABLE CommentWarnings (
     VideoID INT NOT NULL,
     CommentText VARCHAR(500) NOT NULL,
     WarningDate DATETIME NOT NULL DEFAULT GETDATE(),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
 CREATE INDEX userIDWarning ON CommentWarnings (UserID);
