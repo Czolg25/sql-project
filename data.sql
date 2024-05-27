@@ -23,7 +23,7 @@ INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 3, 1,
 INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 1, 2, 'Excellent tutorial! Learned a lot.', '2023-02-26');
 INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 3, 3, 'Awesome tips! Just what I needed to get started.', '2023-03-16');
 INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 4, 4, 'Fantastic routine! Feels amazing after doing it.', '2023-04-11');
-INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 5, 4, 'Thank you for sharing! Great way to start the day.', '2023-04-12');
+INSERT INTO Comments ( UserID, VideoID, CommentText) VALUES ( 5, 4, 'Thank you for sharing! Great way to start the day.');
 INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 1, 5, 'Love these ideas! Can''t wait to try them out.', '2023-05-16');
 INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 2, 6, 'Very helpful tips! Excited to practice them.', '2023-06-21');
 INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 8, 6, 'very bad video.', '2023-06-21');
