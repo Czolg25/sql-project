@@ -1,4 +1,4 @@
-y-- Uzupełnienie tabeli Users (Użytkownicy)
+-- Uzupełnienie tabeli Users (Użytkownicy)
 INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ('john_doe', 'john@example.com', PWDENCRYPT('password123'), '2023-01-15');
 INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ('jane_smith', 'jane@example.com', PWDENCRYPT('passw0rd'), '2023-02-20');
 INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ( 'mike_jones', 'mike@example.com', PWDENCRYPT('securepass'), '2023-03-10');
