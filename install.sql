@@ -85,10 +85,6 @@ CREATE TABLE Subscriptions (
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (ChannelID) REFERENCES Users(UserID)
 );
-
-CREATE INDEX indexUserID ON Subscriptions (UserID);
-CREATE INDEX indexChannelID ON Subscriptions (ChannelID);
-
 CREATE TABLE CommentWarnings (
     WarningID INT IDENTITY(1,1) PRIMARY KEY,
     UserID INT  NOT NULL,
@@ -99,7 +95,6 @@ CREATE TABLE CommentWarnings (
 );
 
 CREATE INDEX userIDWarning ON CommentWarnings (UserID);
-CREATE INDEX videoIDWarning ON CommentWarnings (VideoID);
 
 CREATE TABLE UsersBackups (
     UserBackupID INT IDENTITY(1,1) PRIMARY KEY,
