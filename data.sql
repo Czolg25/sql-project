@@ -65,5 +65,7 @@ INSERT INTO Subscriptions (UserID, ChannelID) VALUES (4, 3);
 
 
 UPDATE Comments SET CommentText= 'Bad user and very bad video' WHERE CommentID = 12;
+UPDATE Comments SET CommentText= 'Bad user and very bad video ' WHERE CommentID = 8;
+UPDATE Comments SET CommentText= 'Bad user and very bad video :(' WHERE CommentID = 1;
 EXEC DeleteUser @UserID = 8;
 EXEC DeleteUser @UserID = 9;
