@@ -37,8 +37,8 @@ CREATE TABLE Videos (
     Views INT DEFAULT 0,
     Likes INT DEFAULT 0,
     Dislikes INT DEFAULT 0,
-    serverID INT,
-    sectorID INT,
+    serverID INT NOT NULL,
+    sectorID INT NOT NULL,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE Comments (
     UserID INT,
     VideoID INT,
     CommentText VARCHAR(500) NOT NULL,
-    CommentDate DATETIME NOT NULL  DEFAULT GETDATE(),
+    CommentDate DATETIME NOT NULL DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (VideoID) REFERENCES Videos(VideoID)
 );
@@ -85,10 +85,6 @@ CREATE TABLE Subscriptions (
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (ChannelID) REFERENCES Users(UserID)
 );
-
-CREATE INDEX indexUserID ON Subscriptions (UserID);
-CREATE INDEX indexChannelID ON Subscriptions (ChannelID);
-
 CREATE TABLE CommentWarnings (
     WarningID INT IDENTITY(1,1) PRIMARY KEY,
     UserID INT  NOT NULL,
@@ -99,7 +95,6 @@ CREATE TABLE CommentWarnings (
 );
 
 CREATE INDEX userIDWarning ON CommentWarnings (UserID);
-CREATE INDEX videoIDWarning ON CommentWarnings (VideoID);
 
 CREATE TABLE UsersBackups (
     UserBackupID INT IDENTITY(1,1) PRIMARY KEY,
