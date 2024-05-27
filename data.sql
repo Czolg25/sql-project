@@ -3,9 +3,11 @@ INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ('john_doe', 'j
 INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ('jane_smith', 'jane@example.com', PWDENCRYPT('passw0rd'), '2023-02-20');
 INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ( 'mike_jones', 'mike@example.com', PWDENCRYPT('securepass'), '2023-03-10');
 INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ( 'sarah_wilson', 'sarah@example.com', PWDENCRYPT('sarahpass'), '2023-04-05');
-INSERT INTO Users (Username, Email, Password) VALUES ( 'chris_brown', PWDENCRYPT('chris@example.com'), 'brown123');
-INSERT INTO Users (Username, Email, Password) VALUES ( 'anna_s', PWDENCRYPT('as@ox.com'), 'psss');
-INSERT INTO Users (Username, Email, Password) VALUES ( 'test', PWDENCRYPT('tt@ox.com'), 'qq');
+INSERT INTO Users (Username, Email, Password) VALUES ( 'chris_brown','chris@example.com',  PWDENCRYPT('brown123'));
+INSERT INTO Users (Username, Email, Password) VALUES ( 'anna_s', 'as@ox.com', PWDENCRYPT( 'psss'));
+INSERT INTO Users (Username, Email, Password) VALUES ( 'test', 'tt@ox.com',  PWDENCRYPT('qq'));
+INSERT INTO Users (Username, Email, Password) VALUES ( 'test3', 'tat@ox.com',  PWDENCRYPT('qq'));
+INSERT INTO Users (Username, Email, Password) VALUES ( 'test2', 'tdt@ox.com',  PWDENCRYPT('qq'));
 
 -- Uzupełnienie tabeli Videos (Filmy)
 INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes) VALUES (1, 'How to Cook Pasta', 'Learn the art of cooking pasta from scratch.', '2023-01-20', 5000, 100, 5);
@@ -24,6 +26,10 @@ INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 4, 4,
 INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 5, 4, 'Thank you for sharing! Great way to start the day.', '2023-04-12');
 INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 1, 5, 'Love these ideas! Can''t wait to try them out.', '2023-05-16');
 INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 2, 6, 'Very helpful tips! Excited to practice them.', '2023-06-21');
+INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 8, 6, 'bad video.', '2023-06-21');
+INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 8, 6, 'bad video.', '2023-06-21');
+INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 8, 6, 'bad video.', '2023-06-21');
+INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 9, 6, 'very bad video.', '2023-06-21');
 
 
 -- Uzupełnienie tabeli Categories (Kategorie)
