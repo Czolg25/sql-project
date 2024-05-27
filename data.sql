@@ -1,13 +1,13 @@
 -- Uzupełnienie tabeli Users (Użytkownicy)
-INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ('john_doe', 'john@example.com', PWDENCRYPT('password123'), '2023-01-15');
-INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ('jane_smith', 'jane@example.com', PWDENCRYPT('passw0rd'), '2023-02-20');
-INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ( 'mike_jones', 'mike@example.com', PWDENCRYPT('securepass'), '2023-03-10');
-INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ( 'sarah_wilson', 'sarah@example.com', PWDENCRYPT('sarahpass'), '2023-04-05');
-INSERT INTO Users (Username, Email, Password) VALUES ( 'chris_brown','chris@example.com',  PWDENCRYPT('brown123'));
-INSERT INTO Users (Username, Email, Password) VALUES ( 'anna_s', 'as@ox.com', PWDENCRYPT( 'psss'));
-INSERT INTO Users (Username, Email, Password) VALUES ( 'test', 'tt@ox.com',  PWDENCRYPT('qq'));
-INSERT INTO Users (Username, Email, Password) VALUES ( 'test3', 'tat@ox.com',  PWDENCRYPT('qq'));
-INSERT INTO Users (Username, Email, Password) VALUES ( 'test2', 'tdt@ox.com',  PWDENCRYPT('qq'));
+INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ('john_doe', 'john@example.com',HASHBYTES('SHA2_256','password123'), '2023-01-15');
+INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ('jane_smith', 'jane@example.com', HASHBYTES('SHA2_256','passw0rd'), '2023-02-20');
+INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ( 'mike_jones', 'mike@example.com', HASHBYTES('SHA2_256','securepass'), '2023-03-10');
+INSERT INTO Users (Username, Email, Password, DateJoined) VALUES ( 'sarah_wilson', 'sarah@example.com', HASHBYTES('SHA2_256','sarahpass'), '2023-04-05');
+INSERT INTO Users (Username, Email, Password) VALUES ( 'chris_brown','chris@example.com',  HASHBYTES('SHA2_256','brown123'));
+INSERT INTO Users (Username, Email, Password) VALUES ( 'anna_s', 'as@ox.com', HASHBYTES('SHA2_256','psss'));
+INSERT INTO Users (Username, Email, Password) VALUES ( 'test', 'tt@ox.com',  HASHBYTES('SHA2_256','qq'));
+INSERT INTO Users (Username, Email, Password) VALUES ( 'test3', 'tat@ox.com',  HASHBYTES('SHA2_256','qq'));
+INSERT INTO Users (Username, Email, Password) VALUES ( 'test2', 'tdt@ox.com',  HASHBYTES('SHA2_256','qq'));
 
 -- Uzupełnienie tabeli Videos (Filmy)
 INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes) VALUES (1, 'How to Cook Pasta', 'Learn the art of cooking pasta from scratch.', '2023-01-20', 5000, 100, 5);
