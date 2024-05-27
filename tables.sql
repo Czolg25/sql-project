@@ -45,6 +45,7 @@ CREATE TABLE Videos (
 
 CREATE INDEX indexTitle ON Videos (Title);
 CREATE INDEX indexUploadDate ON Videos (UploadDate);
+CREATE INDEX indexVideoStorage ON Videos (serverID,sectorID);
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id of storage server' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Videos', @level2type=N'COLUMN',@level2name=N'serverID';
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id of video address storage server' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Videos', @level2type=N'COLUMN',@level2name=N'sectorID';
@@ -104,4 +105,4 @@ CREATE TABLE UsersBackups (
     DateLeft DATETIME NOT NULL DEFAULT GETDATE()
 );
 
-CREATE INDEX usernameBackups ON UsersBackups (Username,Email);
+CREATE INDEX indexUsernameBackups ON UsersBackups (Username,Email);
