@@ -116,19 +116,19 @@ ON Comments
 FOR INSERT
 AS
 BEGIN
-DECLARE @CommentID INT;
-DECLARE CommentCursor CURSOR FOR (SELECT CommentID FROM inserted);
-
-OPEN CommentCursor;
-FETCH NEXT FROM CommentCursor INTO @CommentID;
-WHILE @@FETCH_STATUS = 0
-BEGIN
-EXEC checkComment @commentID = @CommentID;
-FETCH NEXT FROM CommentCursor INTO @CommentID;
-END;
-
-CLOSE CommentCursor;
-DEALLOCATE CommentCursor;
+    DECLARE @CommentID INT;
+    DECLARE CommentCursor CURSOR FOR (SELECT CommentID FROM inserted);
+    
+    OPEN CommentCursor;
+    FETCH NEXT FROM CommentCursor INTO @CommentID;
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        EXEC checkComment @commentID = @CommentID;
+        FETCH NEXT FROM CommentCursor INTO @CommentID;
+    END;
+    
+    CLOSE CommentCursor;
+    DEALLOCATE CommentCursor;
 END;
 
 CREATE TRIGGER AddCommentWarningOnUpdateComment
@@ -150,42 +150,14 @@ END;
 CLOSE CommentCursor;
 DEALLOCATE CommentCursor;
 END;
-CREATE PROCEDURE backupUser
-    @UserID INT
+
+
+CREATE TRIGGER backupUsersTrigger
+ON CommentWarnings
+for DELETE
 AS
 BEGIN
-    BEGIN TRANSACTION;
-
-    BEGIN TRY
-        INSERT INTO UsersBackups(Username,Email,WarningCount) SELECT Users.Username,Users.Email, COUNT(Users.UserID) AS WarningCount FROM Users
-INNER JOIN CommentWarnings ON Users.UserID = CommentWarnings.UserID  WHERE Users.UserID = @UserID
-GROUP BY Users.UserID, Users.Username,Users.Email;
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-       
-        THROW;
-    END CATCH
-END;
-
-CREATE TRIGGER DeleteUserTrigger
-ON Users
-AFTER DELETE
-AS
-BEGIN
-DECLARE @UserID  INT;
-DECLARE CommentCursor CURSOR FOR (SELECT UserID  FROM deleted);
-
-OPEN CommentCursor;
-FETCH NEXT FROM CommentCursor INTO @UserID ;
-WHILE @@FETCH_STATUS = 0
-BEGIN
-    EXEC backupUser @UserID = @UserID;
-FETCH NEXT FROM CommentCursor INTO @UserID;
-END;
-
-CLOSE CommentCursor;
-DEALLOCATE CommentCursor;
+    INSERT INTO UsersBackups(Username,Email,WarningCount) SELECT Users.Username,Users.Email, COUNT(Users.UserID) AS WarningCount FROM deleted
+    INNER JOIN Users ON deleted.UserID = Users.UserID
+    GROUP BY Users.UserID, Users.Username,Users.Email;
 END;
