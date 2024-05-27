@@ -150,6 +150,25 @@ END;
 CLOSE CommentCursor;
 DEALLOCATE CommentCursor;
 END;
+CREATE PROCEDURE backupUser
+    @UserID INT
+AS
+BEGIN
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        INSERT INTO UsersBackups(Username,Email,WarningCount) SELECT Users.Username,Users.Email, COUNT(Users.UserID) AS WarningCount FROM Users
+INNER JOIN CommentWarnings ON Users.UserID = CommentWarnings.UserID  WHERE Users.UserID = @UserID
+GROUP BY Users.UserID, Users.Username,Users.Email;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+       
+        THROW;
+    END CATCH
+END;
 
 CREATE TRIGGER DeleteUserTrigger
 ON Users
@@ -163,10 +182,7 @@ OPEN CommentCursor;
 FETCH NEXT FROM CommentCursor INTO @UserID ;
 WHILE @@FETCH_STATUS = 0
 BEGIN
-PRINT @UserID ;
-INSERT INTO UsersBackups(Username,Email,WarningCount) SELECT Users.Username,Users.Email, COUNT(Users.UserID) AS WarningCount FROM Users
-INNER JOIN CommentWarnings ON Users.UserID = CommentWarnings.UserID  WHERE Users.UserID = @UserID
-GROUP BY Users.UserID, Users.Username,Users.Email;
+    EXEC backupUser @UserID = @UserID;
 FETCH NEXT FROM CommentCursor INTO @UserID;
 END;
 
