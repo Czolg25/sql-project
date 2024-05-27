@@ -1,5 +1,5 @@
-DROP PROCEDURE IF EXISTS deleteUser;
-DROP PROCEDURE IF EXISTS checkComment;
+DROP PROCEDURE IF EXISTS DeleteUser;
+DROP PROCEDURE IF EXISTS CheckComment;
 
 DROP TRIGGER IF EXISTS AddCommentWarningOnInsertComment;
 DROP TRIGGER IF EXISTS AddCommentWarningOnUpdateComment;
