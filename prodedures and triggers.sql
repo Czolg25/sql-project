@@ -1,4 +1,4 @@
-CREATE PROCEDURE deleteUser
+CREATE PROCEDURE DeleteUser
     @UserID INT
 AS
 BEGIN
@@ -36,7 +36,7 @@ BEGIN
     END CATCH
 END;
 
-CREATE PROCEDURE checkComment
+CREATE PROCEDURE CheckComment
     @commentID INT
 AS
 BEGIN
