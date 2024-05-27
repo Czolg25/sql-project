@@ -3,7 +3,7 @@ DROP PROCEDURE IF EXISTS checkComment;
 
 DROP TRIGGER IF EXISTS AddCommentWarningOnInsertComment;
 DROP TRIGGER IF EXISTS AddCommentWarningOnUpdateComment;
-DROP TRIGGER IF EXISTS DeleteUserTrigger;
+DROP TRIGGER IF EXISTS BackupUsersTrigger;
 
 DROP TABLE IF EXISTS UsersBackups;
 DROP TABLE IF EXISTS CommentWarnings;
