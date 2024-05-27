@@ -55,7 +55,7 @@ CREATE TABLE Comments (
     UserID INT,
     VideoID INT,
     CommentText VARCHAR(500) NOT NULL,
-    CommentDate DATETIME NOT NULL,
+    CommentDate DATETIME NOT NULL  DEFAULT GETDATE(),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (VideoID) REFERENCES Videos(VideoID)
 );
