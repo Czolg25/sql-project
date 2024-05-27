@@ -37,8 +37,8 @@ CREATE TABLE Videos (
     Views INT DEFAULT 0,
     Likes INT DEFAULT 0,
     Dislikes INT DEFAULT 0,
-    serverID INT,
-    sectorID INT,
+    serverID INT NOT NULL,
+    sectorID INT NOT NULL,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
