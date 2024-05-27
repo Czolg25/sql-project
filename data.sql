@@ -10,12 +10,12 @@ INSERT INTO Users (Username, Email, Password) VALUES ( 'test3', 'tat@ox.com',  H
 INSERT INTO Users (Username, Email, Password) VALUES ( 'test2', 'tdt@ox.com',  HASHBYTES('SHA2_256','qq'));
 
 -- Uzupełnienie tabeli Videos (Filmy)
-INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes) VALUES (1, 'How to Cook Pasta', 'Learn the art of cooking pasta from scratch.', '2023-01-20', 5000, 100, 5);
-INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes) VALUES (2, 'Guitar Tutorial: Beginner to Pro', 'Master the guitar with this comprehensive tutorial series.', '2023-02-25', 8000, 200, 8);
-INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes) VALUES ( 1, 'Fitness Tips for Beginners', 'Get started on your fitness journey with these helpful tips.', '2023-03-15', 3000, 80, 2);
-INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes) VALUES ( 3, 'Morning Yoga Routine', 'Start your day right with this energizing yoga routine.', '2023-04-10', 4500, 120, 3);
-INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes) VALUES ( 4, 'DIY Home Decor Ideas', 'Spruce up your living space with these creative DIY decor ideas.', '2023-05-15', 6000, 150, 5);
-INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes) VALUES ( 5, 'Photography Tips for Beginners', 'Learn the basics of photography and improve your skills.', '2023-06-20', 4000, 100, 2);
+INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes,serverID,sectorID) VALUES (1, 'How to Cook Pasta', 'Learn the art of cooking pasta from scratch.', '2023-01-20', 5000, 100, 5,1,1);
+INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes,serverID,sectorID) VALUES (2, 'Guitar Tutorial: Beginner to Pro', 'Master the guitar with this comprehensive tutorial series.', '2023-02-25', 8000, 200, 8,1,2);
+INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes,serverID,sectorID) VALUES ( 1, 'Fitness Tips for Beginners', 'Get started on your fitness journey with these helpful tips.', '2023-03-15', 3000, 80, 2,1,3);
+INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes,serverID,sectorID) VALUES ( 3, 'Morning Yoga Routine', 'Start your day right with this energizing yoga routine.', '2023-04-10', 4500, 120, 3,3,2);
+INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes,serverID,sectorID) VALUES ( 4, 'DIY Home Decor Ideas', 'Spruce up your living space with these creative DIY decor ideas.', '2023-05-15', 6000, 150, 5,5,4);
+INSERT INTO Videos (UserID, Title, Description, UploadDate, Views, Likes, Dislikes,serverID,sectorID) VALUES ( 5, 'Photography Tips for Beginners', 'Learn the basics of photography and improve your skills.', '2023-06-20', 4000, 100, 2,6,7);
 
 -- Uzupełnienie tabeli Comments (Komentarze)
 INSERT INTO Comments ( UserID, VideoID, CommentText, CommentDate) VALUES ( 2, 1, 'Great recipe! Can''t wait to try it out.', '2023-01-21');
