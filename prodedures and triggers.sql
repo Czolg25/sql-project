@@ -149,7 +149,7 @@ BEGIN
 END;
 
 
-CREATE TRIGGER backupUsersTrigger
+CREATE TRIGGER BackupUsersTrigger
 ON CommentWarnings
 for DELETE
 AS
