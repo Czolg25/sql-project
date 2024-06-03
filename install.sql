@@ -190,6 +190,11 @@ BEGIN
 				RETURN;
 			END
 
+			IF (@Len - @Pos) <= 0
+			BEGIN
+				RETURN;
+			END;
+				
 			SET @CommentText = RIGHT(@CommentText, @Len - @Pos);
 
 			SET @Pos = CHARINDEX(' ', @CommentText);
