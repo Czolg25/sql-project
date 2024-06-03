@@ -154,75 +154,45 @@ AS
 BEGIN
     BEGIN TRANSACTION;
     BEGIN TRY
-	DECLARE @BadWorlds TABLE ([World] VARCHAR(20));
-	INSERT INTO @BadWorlds VALUES ('Example'),('Bad'),('world');
-
+	DECLARE @BadWorlds TABLE (World VARCHAR(20));
+	INSERT INTO @BadWorlds VALUES ('%Example%'),('%Bad%'),('%world%');
+	
 	DECLARE @Comment TABLE (
-		UserID INT  NOT NULL,
-		VideoID INT NOT NULL,
-		CommentText VARCHAR(500) NOT NULL
+	UserID INT  NOT NULL,
+	VideoID INT NOT NULL,
+	CommentText VARCHAR(500) NOT NULL
 	);
-
+	
 	INSERT INTO @Comment SELECT UserID,VideoID,CommentText FROM Comments WHERE commentID = @commentID;
 
-			DECLARE @CommentText VARCHAR(500) = (SELECT CommentText FROM @Comment);
-	SET @CommentText = LOWER(@CommentText);
-
-	SET @CommentText = REPLACE(REPLACE(REPLACE(LOWER(@CommentText),'.',''),'!',''),',',''); -- example chars to delete
-
-	DECLARE @Word VARCHAR(100);
-	DECLARE @Pos INT;
-	DECLARE @Len INT;
-
-	SET @Pos = CHARINDEX(' ', @CommentText);
-	SET @Len = LEN(@CommentText);
-
-	WHILE @Len > 0
-	BEGIN
-		IF @Pos > 0
-		BEGIN
-			SET @Word = LEFT(@CommentText, @Pos - 1);
-
-			IF EXISTS (SELECT 1 FROM @BadWorlds WHERE World LIKE @Word)
-			BEGIN
-				INSERT INTO CommentWarnings(UserID,VideoID,CommentText) VALUES ((SELECT UserID FROM @Comment),(SELECT VideoID FROM @Comment),(SELECT CommentText FROM @Comment));
-				COMMIT TRANSACTION;
-				RETURN;
-			END
-
-			IF (@Len - @Pos) <= 0
-			BEGIN
-				RETURN;
-			END;
-				
-			SET @CommentText = RIGHT(@CommentText, @Len - @Pos + 1);
-
-			SET @Pos = CHARINDEX(' ', @CommentText);
-			SET @Len = LEN(@CommentText);
-		END
-		ELSE
-			BEGIN
-			
-			SET @Word = @CommentText;
-
-			IF EXISTS (SELECT 1 FROM @BadWorlds WHERE World LIKE @Word)
-			BEGIN
-				INSERT INTO CommentWarnings(UserID,VideoID,CommentText) VALUES ((SELECT UserID FROM @Comment),(SELECT VideoID FROM @Comment),(SELECT CommentText FROM @Comment));
-				COMMIT TRANSACTION;
-				RETURN;
-				END
-
-			SET @Len = 0;
-		END
-	END
-
-	COMMIT TRANSACTION;
-	END TRY
-	BEGIN CATCH
-		ROLLBACK TRANSACTION;
+	    DECLARE @world VARCHAR(20);
+	    DECLARE CommentCursor CURSOR FOR (SELECT World FROM @BadWorlds);
 	   
-		THROW;
-	END CATCH
+	    OPEN CommentCursor;
+	    FETCH NEXT FROM CommentCursor INTO @world ;
+	    WHILE @@FETCH_STATUS = 0
+	    BEGIN
+		if EXISTS( SELECT 1 FROM Comments WHERE commentID = @commentID and LOWER(CommentText) like LOWER(@world))
+		begin
+		INSERT INTO CommentWarnings(UserID,VideoID,CommentText) VALUES ((SELECT UserID FROM @Comment),(SELECT VideoID FROM @Comment),(SELECT CommentText FROM @Comment));
+		break;
+		end;
+
+        FETCH NEXT FROM CommentCursor INTO @world ;
+    END;
+   
+    CLOSE CommentCursor;
+    DEALLOCATE CommentCursor;
+
+
+
+COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+ROLLBACK TRANSACTION;
+ 
+THROW;
+END CATCH
 END;
 
 CREATE TRIGGER AddCommentWarningOnInsertComment
