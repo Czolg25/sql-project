@@ -166,10 +166,10 @@ BEGIN
 	INSERT INTO @Comment SELECT UserID,VideoID,CommentText FROM Comments WHERE commentID = @commentID;
 
 	    DECLARE @world VARCHAR(20);
-	    DECLARE CommentCursor CURSOR FOR (SELECT World FROM @BadWorlds);
+	    DECLARE CommentCursor2 CURSOR FOR (SELECT World FROM @BadWorlds);
 	   
-	    OPEN CommentCursor;
-	    FETCH NEXT FROM CommentCursor INTO @world ;
+	    OPEN CommentCursor2;
+	    FETCH NEXT FROM CommentCursor2 INTO @world ;
 	    WHILE @@FETCH_STATUS = 0
 	    BEGIN
 		if EXISTS( SELECT 1 FROM Comments WHERE commentID = @commentID and LOWER(CommentText) like LOWER(@world))
@@ -178,11 +178,11 @@ BEGIN
 		break;
 		end;
 
-        FETCH NEXT FROM CommentCursor INTO @world ;
+        FETCH NEXT FROM CommentCursor2 INTO @world ;
     END;
    
-    CLOSE CommentCursor;
-    DEALLOCATE CommentCursor;
+    CLOSE CommentCursor2;
+    DEALLOCATE CommentCursor2;
 
 
 
