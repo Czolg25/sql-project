@@ -185,7 +185,7 @@ BEGIN
 
 			IF EXISTS (SELECT 1 FROM @BadWorlds WHERE World LIKE @Word)
 			BEGIN
-				INSERT INTO CommentWarnings(UserID,VideoID,CommentText) VALUES ((SELECT UserID FROM @Comment),(SELECT VideoID FROM @Comment),@CommentText);
+				INSERT INTO CommentWarnings(UserID,VideoID,CommentText) VALUES ((SELECT UserID FROM @Comment),(SELECT VideoID FROM @Comment),(SELECT CommentText FROM @Comment));
 				COMMIT TRANSACTION;
 				RETURN;
 			END
@@ -195,7 +195,7 @@ BEGIN
 				RETURN;
 			END;
 				
-			SET @CommentText = RIGHT(@CommentText, @Len - @Pos);
+			SET @CommentText = RIGHT(@CommentText, @Len - @Pos + 1);
 
 			SET @Pos = CHARINDEX(' ', @CommentText);
 			SET @Len = LEN(@CommentText);
@@ -207,7 +207,7 @@ BEGIN
 
 			IF EXISTS (SELECT 1 FROM @BadWorlds WHERE World LIKE @Word)
 			BEGIN
-				INSERT INTO CommentWarnings(UserID,VideoID,CommentText) VALUES ((SELECT UserID FROM @Comment),(SELECT VideoID FROM @Comment),@CommentText);
+				INSERT INTO CommentWarnings(UserID,VideoID,CommentText) VALUES ((SELECT UserID FROM @Comment),(SELECT VideoID FROM @Comment),(SELECT CommentText FROM @Comment));
 				COMMIT TRANSACTION;
 				RETURN;
 				END
